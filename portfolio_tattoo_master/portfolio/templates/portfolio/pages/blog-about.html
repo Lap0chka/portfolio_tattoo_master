@@ -1,0 +1,84 @@
+{%extends 'rymma/base.html'%}
+{%load static%}
+{%block title%}Deteil Block{%endblock%}
+{%block content%}
+    <!-- Blog Area Start -->
+    <section class="blog-area section_padding_100 mt-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- Single Blog Area -->
+                <div class="col-10">
+                    <div class="single-blog-area text-center mb-100 wow fadeInUpBig" data-wow-delay="100ms" data-wow-duration="1s">
+                        <div class="blog-thumbnail mb-100">
+                            <img src="{{post.pictures.url}}" alt="">
+                        </div>
+                        <div class="blog-content">
+                            <span></span>
+                            <h2>{{post.title}}</h2>
+                            <a href="#" class="post-date">{{post.published}}</a>
+                            <a href="#" class="post-author">By {{post.author}}</a>
+                            <p>{{ post.body|linebreaks }}</p>
+                        </div>
+                    </div>
+                </div>
+                <section id="commentForm" class="contact-area section_padding_10 mt-10">
+                    <div class="container">
+                        <div class="tab-pane fade show active" id="tab-pane-3">
+                            <div class="contact-heading-text text-center mb-10">
+                                <span></span>
+                                <h2>Do you want to add something? Please go ahead</h2>
+                                <p> </p>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6" id="comments-container">
+                                    <h5 class="mb-4">
+                                         {% with comments.count as total_comments %}
+                                            {{ total_comments }} review{{ total_comments|pluralize }}
+                                        {% endwith %}
+                                    </h5>
+                                    {%for comment in comments%}
+                                        <div class="media mb-4" >
+                                            <div class="media-body">
+                                                <h6>{{comment.user}}<small> - <i>{{comment.created}}</i></small></h6>
+                                                <p>{{comment.body}}</p>
+                                            </div>
+                                        </div>
+                                    {%endfor%}
+                                </div>
+                                <div class="col-md-6">
+                                    <h4 class="mb-4">Leave a review</h4>
+                                    <form action="" method="post" >
+                                        {%csrf_token%}
+                                        <div class="form-group">
+                                            <label> Your Review </label>
+                                            {% if messages %}
+                                                <ul class="messages">
+                                                    {% for message in messages %}
+                                                        {% if message.tags == 'error' %}
+                                                            <li style="color: red;">{{ message }}</li>
+                                                        {% else %}
+                                                            <li style="color: green;">{{ message }}</li>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                            {{form.user}}
+                                            <br>
+                                            <div class="col-14">
+                                                {{form.body}}
+                                            </div>
+                                        </div>
+                                        <div class="col-12 text-center">
+                                            <button type="submit" class="btn studio-btn mt-3"><img src="img/core-img/logo-icon.png" alt=""> Send</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Area End -->
+{%endblock%}

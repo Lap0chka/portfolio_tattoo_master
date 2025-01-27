@@ -1,0 +1,36 @@
+{%extends 'base.html' %}
+{% block content %}
+<section class="welcome-area">
+    <div class="carousel h-100 slide" data-ride="carousel" id="welcomeSlider">
+        <!-- Carousel Inner -->
+        <div class="carousel-inner h-100">
+            {% for image in images %}
+            <div class="carousel-item h-100 bg-img {% if forloop.first %}active{% endif %}"
+                 style="background-image: url({{ image.image.url }});
+                 background-size: cover;
+                 background-position: center;
+                 background-repeat: no-repeat;">
+                <div class="carousel-content h-100 position-relative">
+                    {% if image.text %}
+                    <div class="slide-text text-center">
+                        <h1>{{ image.text }} <br><b> - {{ image.author }}</b></h1>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Carousel Indicators -->
+        <ol class="carousel-indicators">
+            {% for image in images %}
+            <li data-target="#welcomeSlider" data-slide-to="{{ forloop.counter0 }}"
+                class="{% if forloop.first %}active{% endif %} bg-img"
+                style="background-image: url({{image.image.url}});"></li>
+            {% endfor %}
+        </ol>
+    </div>
+</section>
+{%endblock %}
+{%block footer%}
+{%endblock%}

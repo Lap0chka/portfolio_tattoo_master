@@ -1,0 +1,92 @@
+{%extends 'rymma/base.html'%}
+{%load static%}
+{%block title%}Contact{%endblock%}
+
+{%block content%}
+    <section class="contact-area section_padding_100 mt-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-10">
+                    <div class="contact-heading-text text-center mb-100">
+                        <span></span>
+                        <h2>Please get in touch</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel lectus eu felis semper finibus ac eget ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vulputate id justo quis facilisis. Vestibulum id orci ligula. Sed tempor, nunc ut sodales pulvinar, mauris ante euismod magna, at elementum lectus leo sed enim. Praesent dictum suscipit tincidunt. Nulla facilisi. Aenean in mollis orci. Ut interdum vulputate ante a egestas. Pellentesque varius purus malesuada arcu semper vehicula. </p>
+                    </div>
+                </div>
+                <!-- Contact Form Area -->
+                <div class="col-10">
+                    <div class="contact-form-area">
+                        <form action="#" method="post">
+                            {% if messages %}
+                                <ul class="messages">
+                                    {% for message in messages %}
+                                        {% if message.tags == 'error' %}
+                                            <li style="color: red;">{{ message }}</li>
+                                        {% else %}
+                                            <li style="color: green;">{{ message }}</li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                             {%csrf_token%}
+                            <div class="row">
+                                <div class="col-12 col-md-4">
+                                    {{form.name}}
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    {{form.email}}
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    {{form.subject}}
+                                </div>
+                                <div class="col-12">
+                                    {{form.message}}
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button type="submit" class="btn studio-btn mt-3"><img src="{% static 'img/core-img/logo-icon.png'%}" alt=""> Send</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Google Maps -->
+   <div class="map-area">
+        <div class="container">
+            <div class="row justify-content-end">
+                <div class="col-10">
+                    <div id="googleMap"></div>
+                    <!-- Contact Info -->
+                    <div class="contact-core-info d-flex align-items-center wow fadeInLeftBig" data-wow-delay="1s" data-wow-duration="1000ms">
+                        <div class="contactInfo">
+                            <img src="{%static 'img/core-img/logo.png'%}" alt="">
+                            <!-- Single Footer Content -->
+                            <div class="single-footer-content">
+                                <img src="{%static 'img/core-img/map.png'%}" alt="">
+                                <a href="#">Manteuffelstrasse 77, Berlin, Germany</a>
+                            </div>
+                            <!-- Single Footer Content -->
+                            <div class="single-footer-content">
+                                <img src="{%static 'img/core-img/envelope-2.png'%}" alt="">
+                                <a href="https://www.atelier-jiyu.com/contact">info@atelier-jiyu.com</a>
+                            </div>
+                            <div class="single-footer-content">
+                                <a href="https://www.atelier-jiyu.com">Studio site</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <!-- Instagram Feeds Area -->
+        {%include 'rymma/include/instagram_carousel.html' %}
+    </section>
+    <!-- Follow Me Instagram Area End -->
+
+{%endblock%}

@@ -1,0 +1,114 @@
+{%extends 'base.html'%}
+{%load static%}
+
+
+{%block content%}
+
+<!-- About Me Area Start -->
+<section class="about-me-area mt-100 section_padding_100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <div class="about-me-thumb">
+                    <img src="{%static 'img/page/about_me.JPG'%}" alt="">
+                </div>
+            </div>
+            <div class="col-10">
+                <div class="about-content mt-100 mb-100 text-center">
+                    <span></span>
+                    <h2>What can I tell you about me?</h2>
+                    <p>Please allow me to introduce myself. My name is Rima, and I am a tattoo artist with over five
+                        years of experience in the industry. Throughout my journey, I have had the privilege of creating
+                        numerous tattoos that have left a lasting impression on my clients. It's not just a profession
+                        for me; it's a passion that fuels my creativity and allows me to express myself
+                        artistically.<br>
+
+                        Aside from my love for tattooing, I have a deep affection for travel and exploration. Roaming
+                        the world has not only broadened my horizons but has also inspired my artistic vision. Each
+                        destination brings new experiences and perspectives that I infuse into my craft, resulting in
+                        unique and diverse creations.</br>
+
+                        Moreover, I am an avid animal lover. Animals have always held a special place in my heart, and
+                        their beauty and grace often find their way into my designs. Whether it's capturing the elegance
+                        of a feline or the strength of a wolf, I strive to honor these magnificent creatures through my
+                        art.</br>
+
+                        In essence, I am Rima – a dedicated tattoo artist, a passionate traveler, and a devoted animal
+                        enthusiast. I look forward to sharing my artistic journey with you and creating meaningful
+                        tattoos that reflect your individuality and spirit. Thank you for allowing me the opportunity to
+                        introduce myself.</p>
+                </div>
+            </div>
+
+            <div class="col-10">
+                <div class="studio-cool-facts-area mb-100">
+                    <div class="row">
+                        <!-- Single Cool Fact-->
+                        <div class="col-12 col-sm-6 col-md-3">
+                            <div class="single-cool-fact d-flex align-items-center">
+                                <div class="cool-facts-icon mr-3">
+                                    <img src="{%static 'img/core-img/gallery.png' %}" alt="">
+                                </div>
+                                <div class="counter-area">
+                                    <h2><span class="counter">10</span>k</h2>
+                                    <h6>Make eskize</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single Cool Fact-->
+                        <div class="col-12 col-sm-6 col-md-3">
+                            <div class="single-cool-fact d-flex align-items-center">
+                                <div class="cool-facts-icon mr-3">
+                                    <img src="{%static 'img/core-img/favorite.png'%}" alt="">
+                                </div>
+                                <div class="counter-area">
+                                    <h2><span class="counter">5</span>K</h2>
+                                    <h6>Happy clients</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single Cool Fact-->
+                        <div class="col-12 col-sm-6 col-md-3">
+                            <div class="single-cool-fact d-flex align-items-center">
+                                <div class="cool-facts-icon mr-3">
+                                    <img src="{%static 'img/core-img/photo-camera-2.png'%}" alt="">
+                                </div>
+                                <div class="counter-area">
+                                    <h2><span class="counter">3217</span></h2>
+                                    <h6>Made Tattoo</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single Cool Fact-->
+                        <div class="col-12 col-sm-6 col-md-3">
+                            <div class="single-cool-fact d-flex align-items-center">
+                                <div class="cool-facts-icon mr-3">
+                                    <img src="{%static 'img/core-img/rocket-launch.png'%}" alt="">
+                                </div>
+                                <div class="counter-area">
+                                    <h2><span class="counter">1000</span></h2>
+                                    <h6>Reviews</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="position-relative d-flex align-items-center justify-content-center">
+                <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Review</h1>
+                <h1 class="position-absolute text-uppercase text-primary">Clients Say</h1>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
+<!-- About Me Area End -->
+{%include 'portfolio/include/instagram_carousel.html' %}
+
+{%endblock%}

@@ -1,0 +1,107 @@
+{%extends 'rymma/base.html'%}
+{%block title%}Information{%endblock%}
+{%block content%}
+        <!-- ***** Elements Area Start ***** -->
+    <section class="elements-area section_padding_100 mt-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-10">
+                    <div class="elements-title">
+                        <h2>What your need to know</h2>
+                    </div>
+                </div>
+
+                <div class="col-10 col-md-5">
+                    <h3>I speak</h3>
+                    <br>
+                    <!-- Progress Bar Content Area -->
+                    <div class="services-progress-bar mb-100">
+                        <!-- Single Progress Bar -->
+                        <div class="single_progress_bar">
+                            <div id="bar1" class="barfiller">
+                                <div class="tipWrap">
+                                    <span class="tip"></span>
+                                </div>
+                                <span class="fill" data-percentage="95"></span>
+                            </div>
+                            <p>Ukraine</p>
+                        </div>
+                        <!-- Single Progress Bar -->
+                        <div class="single_progress_bar">
+                            <div id="bar2" class="barfiller">
+                                <div class="tipWrap">
+                                    <span class="tip"></span>
+                                </div>
+                                <span class="fill" data-percentage="90"></span>
+                            </div>
+                            <p>Russian</p>
+                        </div>
+                        <!-- Single Progress Bar -->
+                        <div class="single_progress_bar">
+                            <div id="bar3" class="barfiller">
+                                <div class="tipWrap">
+                                    <span class="tip"></span>
+                                </div>
+                                <span class="fill" data-percentage="66"></span>
+                            </div>
+                            <p>English</p>
+                        </div>
+                        <div class="single_progress_bar">
+                            <div id="bar4" class="barfiller">
+                                <div class="tipWrap">
+                                    <span class="tip"></span>
+                                </div>
+                                <span class="fill" data-percentage="25"></span>
+                            </div>
+                            <p>German</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-10 col-md-5">
+                    <div class="accordions mb-100" id="accordion" role="tablist" aria-multiselectable="true">
+                        <!-- single accordian area start -->
+                        <div class="panel single-accordion">
+                            <h6><a role="button" class="" aria-expanded="true" aria-controls="collapseOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">I don't speak Germany
+                                    <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                    <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                                    </a></h6>
+                            <div id="collapseOne" class="accordion-content collapse show">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel lectus eu felis semper finibus ac eget ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vulputate id justo quis facilisis.</p>
+                            </div>
+                        </div>
+                        <!-- single accordian area start -->
+                        <div class="panel single-accordion">
+                            <h6>
+                                <a role="button" class="collapsed" aria-expanded="true" aria-controls="collapseTwo" data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">Before secciion
+                                        <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                        <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                                        </a>
+                            </h6>
+                            <div id="collapseTwo" class="accordion-content collapse">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel lectus eu felis semper finibus ac eget ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vulputate id justo quis facilisis.</p>
+                            </div>
+                        </div>
+                        <!-- single accordian area start -->
+                        <div class="panel single-accordion">
+                            <h6>
+                                <a role="button" aria-expanded="true" aria-controls="collapseThree" class="collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapseThree">Do I need a Tattoo?
+                                        <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                        <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                                    </a>
+                            </h6>
+                            <div id="collapseThree" class="accordion-content collapse">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel lectus eu felis semper finibus ac eget ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vulputate id justo quis facilisis.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Elements Area End ***** -->
+{%endblock%}
+
+
+
+

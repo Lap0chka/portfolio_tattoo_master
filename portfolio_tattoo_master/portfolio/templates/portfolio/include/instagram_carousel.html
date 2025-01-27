@@ -1,0 +1,21 @@
+{%load static%}        <!-- Instagram Feeds Area -->
+<!-- Follow Me Instagram Area Start -->
+<section class="follow-me-instagram-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-11 ml-auto">
+                <div class="follow-me-title">
+                    <h5>Follow me @ Instagram</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="instagram-feeds-area owl-carousel">
+        {%for image, shortcode in img_codes.items%}
+            <div class="single-instagram-feeds">
+                <img src="{% static 'img/rymma_tattoo(inst)/' %}{{ image }}" alt="">
+                <a href="https://www.instagram.com/p/{{shortcode}}"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            </div>
+       {%endfor%}
+    </div>
+</section>

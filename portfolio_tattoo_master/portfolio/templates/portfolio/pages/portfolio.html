@@ -1,0 +1,43 @@
+{%extends 'rymma/base.html'%}
+{%load static%}
+{%block title%}My portfolio {%endblock%}
+{%block content%}
+   <div class="gallery_area clearfix">
+    <div class="container-fluid clearfix">
+        <div class="gallery_menu">
+            <div class="portfolio-menu">
+                <button class="active btn filter-btn" data-filter="*">All</button>
+                {% for tag in tags %}
+                    <button class="btn filter-btn" data-filter=".{{ tag.name|slugify }}">{{ tag.name }}</button>
+                {% endfor %}
+                <button class="btn filter-btn" data-filter=".instagram">Instagram</button>
+            </div>
+        </div>
+
+        <div class="row portfolio-column">
+            <!-- Загрузка изображений с помощью Django -->
+            {% for tag_name, images in images_portfolio.items %}
+                {% for image in images %}
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 column_single_gallery_item {{ tag_name|slugify }}">
+                        <img src="{{ image.image.url }}" alt="" style="width: 100%;">
+                        <div class="hover_overlay">
+                            <a class="gallery_img" href="{{ image.image.url }}"><i class="fa fa-eye"></i></a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+
+            <!-- Загрузка изображений Instagram с помощью Django -->
+            {% for image in images_instagram %}
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 column_single_gallery_item instagram">
+                    <img src="{% static 'img/rymma_tattoo(inst)/' %}{{ image }}" alt="" style="width: 100%;">
+                    <div class="hover_overlay">
+                        <a class="gallery_img" href="{% static 'img/rymma_tattoo(inst)/' %}{{ image }}"><i class="fa fa-eye"></i></a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
