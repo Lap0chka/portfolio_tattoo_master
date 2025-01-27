@@ -248,3 +248,5 @@ media/
 *.db
 *.pid
 migrations/
+.env/
+.env
