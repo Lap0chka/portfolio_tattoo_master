@@ -6,14 +6,11 @@
         <div class="carousel-inner h-100">
             {% for image in images %}
             <div class="carousel-item h-100 bg-img {% if forloop.first %}active{% endif %}"
-                 style="background-image: url({{ image.image.url }});
-                 background-size: cover;
-                 background-position: center;
-                 background-repeat: no-repeat;">
+                 style="background-image: url({{ image.image.url }});">
                 <div class="carousel-content h-100 position-relative">
                     {% if image.text %}
                     <div class="slide-text text-center">
-                        <h1>{{ image.text }} <br><b> - {{ image.author }}</b></h1>
+                        <h1 class="slide-text-h1">{{ image.text }} <br><b> - {{ image.author }}</b></h1>
                     </div>
                     {% endif %}
                 </div>

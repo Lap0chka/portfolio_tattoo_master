@@ -85,8 +85,7 @@
         margin-right: 10px;
     }
     .slide-text {
-        margin-left: 120px;
-        margin-top: -50px;
+        margin-top: 80%;
     }
     .carousel-indicators li {
         height: 50px;
@@ -187,15 +186,13 @@
     }
     .slide-text {
         padding: 15px 15px 10px;
-        margin-left: 65px;
-        margin-top: -40px;
+        margin-top: 150%;
     }
-    .slide-text span {
-        font-size: 24px;
+
+    .slide-text h1 {
+        font-size: 10px;
     }
-    .slide-text h2 {
-        font-size: 16px;
-    }
+
     .contact-popup-form .modal-content {
         padding: 15px;
     }
