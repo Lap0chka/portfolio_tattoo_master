@@ -1,3 +1,4 @@
+{% load i18n %}
 <header class="header-area">
     <div class="container-fluid h-100">
         <div class="row h-100 align-items-center">
@@ -23,32 +24,38 @@
                                 <a href="#" data-toggle="modal" data-target=".contact-modal-lg" data-placement="right"
                                    title="Mail"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
                                     <span></span></a>
-                                <a href="#" data-toggle="modal" data-target=".contact-modal-lg" data-placement="right"
-                                   title="Mail"><i class="fa fa-language fa-2x" aria-hidden="true"></i>
-                                    <span></span></a>
+                                {% get_current_language as LANGUAGE_CODE %}
+                                {% get_language_info for "de" as DE_LANGUAGE %}
+                                {% get_language_info for "en" as EN_LANGUAGE %}
+
+                                 <a {% if LANGUAGE_CODE == 'en'%} href="/{{ DE_LANGUAGE.code }}/"
+                                         {% else %} href="/{{ EN_LANGUAGE.code }}/"{% endif %}
+                                    id="switch-lang"title="{% trans 'Change language' %}">
+                                     <i class="fa fa-language fa-2x" aria-hidden="true"></i>
+                                 </a>
                             </div>
 
 
                             <ul class="navbar-nav ml-auto">
 
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="{%url 'index'%}">Home <span
+                                    <a class="nav-link" href="{% url 'index' %}">{% trans "Home" %}<span
                                             class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{%url 'about'%}">About me</a>
+                                    <a class="nav-link" href="{% url 'about' %}">{% trans "About me" %}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'porfolio' %}">Portfolio</a>
+                                    <a class="nav-link" href="{% url 'porfolio' %}">{% trans "Portfolio" %}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'information' %}">Information</a>
+                                    <a class="nav-link" href="{% url 'information' %}">{% trans "Information" %}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'blog' %}">blog</a>
+                                    <a class="nav-link" href="{% url 'blog' %}">{% trans "Blog" %}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{%url 'contact'%}">Contact</a>
+                                    <a class="nav-link" href="{% url 'contact' %}">{% trans "Contact" %}</a>
                                 </li>
                             </ul>
 

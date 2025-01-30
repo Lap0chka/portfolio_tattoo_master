@@ -1,0 +1,105 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-30 23:34+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: portfolio/templates/portfolio/pages/index.html:13
+msgid "Make an appointment"
+msgstr ""
+
+#: portfolio/templates/portfolio/pages/index.html:18
+msgid "Submit Your Info"
+msgstr ""
+
+#: portfolio/templates/portfolio/pages/index.html:22
+msgid "Name"
+msgstr ""
+
+#: portfolio/templates/portfolio/pages/index.html:27
+msgid "Email"
+msgstr ""
+
+#: portfolio/templates/portfolio/pages/index.html:32
+msgid "Message"
+msgstr ""
+
+#: portfolio/templates/portfolio/pages/index.html:60
+msgid "Submit"
+msgstr ""
+
+#: portfolio_tattoo_master/settings.py:122
+msgid "English"
+msgstr ""
+
+#: portfolio_tattoo_master/settings.py:123
+msgid "Deutsch"
+msgstr ""
+
+#: portfolio_tattoo_master/templates/404.html:8
+msgid "Page Not Found"
+msgstr ""
+
+#: portfolio_tattoo_master/templates/404.html:9
+msgid ""
+"Sorry, the page you are looking for does not exist. It may have been moved "
+"or deleted"
+msgstr ""
+
+#: portfolio_tattoo_master/templates/404.html:10
+msgid "Go to Homepage"
+msgstr ""
+
+#: portfolio_tattoo_master/templates/500.html:8
+msgid "Internal Server Error"
+msgstr ""
+
+#: portfolio_tattoo_master/templates/500.html:9
+msgid "Oops! Something went wrong on our end. We're working to fix it."
+msgstr ""
+
+#: portfolio_tattoo_master/templates/includes/head.html:11
+msgid "Welcome"
+msgstr ""
+
+#: portfolio_tattoo_master/templates/includes/menu.html:33
+msgid "Change language"
+msgstr ""
+
+#: portfolio_tattoo_master/templates/includes/menu.html:42
+msgid "Home"
+msgstr ""
+
+#: portfolio_tattoo_master/templates/includes/menu.html:46
+msgid "About me"
+msgstr ""
+
+#: portfolio_tattoo_master/templates/includes/menu.html:49
+msgid "Portfolio"
+msgstr ""
+
+#: portfolio_tattoo_master/templates/includes/menu.html:52
+msgid "Information"
+msgstr ""
+
+#: portfolio_tattoo_master/templates/includes/menu.html:55
+msgid "Blog"
+msgstr ""
+
+#: portfolio_tattoo_master/templates/includes/menu.html:58
+msgid "Contact"
+msgstr ""

@@ -1,8 +1,10 @@
 import os
 from typing import Any
+
 from django.contrib import admin
 from django.http import HttpRequest
-from .models import MainImages
+
+from .models import MainImages, Feedback
 
 
 @admin.register(MainImages)
@@ -102,3 +104,8 @@ class MainImagesAdmin(admin.ModelAdmin):
 
         # Proceed with the default deletion of the object from the database
         super().delete_model(request, obj)
+
+
+@admin.register(Feedback)
+class FeedBackAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email')

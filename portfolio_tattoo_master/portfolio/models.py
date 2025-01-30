@@ -1,5 +1,6 @@
 import os
 from typing import Any
+
 from django.core.exceptions import ValidationError
 from django.db import models
 
@@ -81,3 +82,21 @@ class MainImages(models.Model):
         verbose_name = "Main Page Image"
         verbose_name_plural = "Main Page Images"
         ordering = ['pk']
+
+
+class Feedback(models.Model):
+    """
+    Model to store user feedback with optional Telegram and WhatsApp contact fields.
+    """
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    message = models.TextField()
+    telegram = models.CharField(max_length=100, blank=True, null=True)
+    whatsapp = models.CharField(max_length=100, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        """
+        Returns a string representation of the feedback entry.
+        """
+        return f"Feedback from {self.name} ({self.email})"

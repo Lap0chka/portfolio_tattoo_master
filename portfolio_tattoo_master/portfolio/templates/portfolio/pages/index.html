@@ -1,9 +1,77 @@
 {%extends 'base.html' %}
+{% load i18n %}
 {% block content %}
 <section class="welcome-area">
     <div class="carousel h-100 slide" data-ride="carousel" id="welcomeSlider">
+        {% include 'includes/messages.html' %}
+        {% if not is_limited %}
+            <a class="color-button text-center" href="#" onclick="openModal()">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                {% trans "Make an appointment" %}
+            </a>
+            <div id="modalOverlay" class="modal-overlay" onclick="closeModal()">
+                <div class="modal-content" onclick="event.stopPropagation();">
+                    <span class="close-btn" onclick="closeModal()">&times;</span>
+                    <h2> {% trans "Submit Your Info" %}</h2>
+                    <form id="modalForm" method="post">
+                        {% csrf_token %}
+                        <label class="nav-link" for="{{ form.name.id_for_label }}">
+                            {% trans "Name" %}
+                        </label>
+                        {{ form.name }}
+
+                        <label class="nav-link" for="{{ form.email.id_for_label }}">
+                            {% trans "Email" %}
+                        </label>
+                        {{ form.email }}
+
+                        <label class="nav-link" for="{{ form.message.id_for_label }}">
+                            {% trans "Message" %}
+                        </label>
+                        {{ form.message }}
+
+                        <div class="col-12 mt-15">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <!-- Telegram -->
+                                <div class="form-group text-center w-50 mr-15">
+                                    <label class="nav-link" for="{{ form.telegram.id_for_label }}">
+                                        Telegram
+                                    </label>
+                                    {{ form.telegram }}
+                                </div>
+
+                                <!-- WhatsApp -->
+                                <div class="form-group text-center w-50">
+                                    <label class="nav-link" for="{{ form.whatsapp.id_for_label }}">
+                                        WhatsApp
+                                    </label>
+                                    {{ form.whatsapp }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 d-flex align-items-center">
+                            {{ form.captcha }}
+                            <button class='js-captcha-refresh'>🔄</button>
+                        </div>
+                        <button type="submit" class="neon-submit mt-15">
+                            {% trans "Submit" %}
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+
+                    </form>
+
+                </div>
+            </div>
+        {% endif %}
         <!-- Carousel Inner -->
         <div class="carousel-inner h-100">
+
             {% for image in images %}
             <div class="carousel-item h-100 bg-img {% if forloop.first %}active{% endif %}"
                  style="background-image: url({{ image.image.url }});">
@@ -28,6 +96,22 @@
         </ol>
     </div>
 </section>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector(".js-captcha-refresh").addEventListener("click", function (e) {
+                e.preventDefault();
+
+                fetch("{% url 'refresh_captcha' %}")
+                    .then(response => response.json())
+                    .then(data => {
+                        document.querySelector(".captcha").src = data.image_url;
+                        document.querySelector("input[name='captcha_0']").value = data.key;
+                    });
+            });
+        });
+    </script>
+
 {%endblock %}
+
 {%block footer%}
 {%endblock%}

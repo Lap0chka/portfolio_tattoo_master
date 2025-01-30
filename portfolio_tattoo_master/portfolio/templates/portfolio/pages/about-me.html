@@ -97,122 +97,48 @@
         </div>
     </div>
     <div class="container-fluid py-5">
-        <div class="container">
-            <div class="position-relative d-flex align-items-center justify-content-center">
-                <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Review</h1>
-                <h1 class="position-absolute text-uppercase text-primary">Clients Say</h1>
-            </div>
-        </div>
-    </div>
     <div class="container">
-        <div class="owl-carousel owl-theme owl-center owl-loaded" id="testimonial">
+        <!-- Заголовок секции -->
+        <div class="position-relative d-flex align-items-center justify-content-center">
+            <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Review</h1>
+            <h1 class="position-absolute text-uppercase text-primary">Clients Say</h1>
+        </div>
+        <br>
 
-
-            <div class="owl-stage-outer owl-height" style="height: 86px;">
-                <div class="owl-stage"
-                     style="transition: all 0.25s ease 0s; width: 7980px; transform: translate3d(-4560px, 0px, 0px);">
-                    <div class="owl-item cloned" style="width: 1140px; margin-right: 0px;">
-                        <div class="carousel-item">
-                            <div class="row">
-                                <div class="col-md-8 col-md-offset-2">
-                                    <div class="text-center">
-                                        <p>“ I've been using Medium Rare templates for a couple of years now - they're
-                                            always highly polished and backed up by amazing support.”</p>
-                                        <p>— Sam Prichard, Interface Designer</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="owl-item cloned" style="width: 1140px; margin-right: 0px;">
-                        <div class="carousel-item">
-                            <div class="row">
-                                <div class="col-md-8 col-md-offset-2">
-                                    <div class="text-center">
-                                        <p>“ I've been using Medium Rare templates for a couple of years now - they're
-                                            always highly polished and backed up by amazing support.”</p>
-                                        <p>— Sam Prichard, Interface Designer</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="owl-item" style="width: 1140px; margin-right: 0px;">
-                        <div class="carousel-item">
-                            <div class="row">
-                                <div class="col-md-8 col-md-offset-2">
-                                    <div class="text-center">
-                                        <p>“ I've been using Medium Rare templates for a couple of years now - they're
-                                            always highly polished and backed up by amazing support.”</p>
-                                        <p>— Sam Prichard, Interface Designer</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="owl-item" style="width: 1140px; margin-right: 0px;">
-                        <div class="carousel-item">
-                            <div class="row">
-                                <div class="col-md-8 col-md-offset-2">
-                                    <div class="text-center">
-                                        <p>“ I've been using Medium Rare templates for a couple of years now - they're
-                                            always highly polished and backed up by amazing support.”</p>
-                                        <p>— Sam Prichard, Interface Designer</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="owl-item active center" style="width: 1140px; margin-right: 0px;">
-                        <div class="carousel-item">
-                            <div class="row">
-                                <div class="col-md-8 col-md-offset-2">
-                                    <div class="text-center">
-                                        <p>“ I've been using Medium Rare templates for a couple of years now - they're
-                                            always highly polished and backed up by amazing support.”</p>
-                                        <p>— Sam Prichard, Interface Designer</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="owl-item cloned" style="width: 1140px; margin-right: 0px;">
-                        <div class="carousel-item">
-                            <div class="row">
-                                <div class="col-md-8 col-md-offset-2">
-                                    <div class="text-center">
-                                        <p>“ I've been using Medium Rare templates for a couple of years now - they're
-                                            always highly polished and backed up by amazing support.”</p>
-                                        <p>— Sam Prichard, Interface Designer</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="owl-item cloned" style="width: 1140px; margin-right: 0px;">
-                        <div class="carousel-item">
-                            <div class="row">
-                                <div class="col-md-8 col-md-offset-2">
-                                    <div class="text-center">
-                                        <p>“ I've been using Medium Rare templates for a couple of years now - they're
-                                            always highly polished and backed up by amazing support.”</p>
-                                        <p>— Sam Prichard, Interface Designer</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <div id="commentsCarousel" class="carousel slide comments-carousel" data-ride="carousel">
+            <div class="carousel-inner">
+                {% for text, author in comments %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="text-center">
+                        <p class="mb-4">{{ text }}</p>
+                        <h5 class="font-weight-bold">- {{ author }}</h5>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            <div class="owl-controls">
-                <div class="owl-nav">
-                    <div class="owl-prev" style=""><i class="fa fa-angle-right"></i></div>
-                    <div class="owl-next" style=""><i class="fa fa-angle-left"></i></div>
-                </div>
-                <div class="owl-dots" style="display: none;"></div>
-            </div>
+
+            <!-- Индикаторы карусели -->
+            <ol class="carousel-indicators">
+                {% for text, author in comments %}
+                <li data-target="#commentsCarousel" data-slide-to="{{ forloop.counter0 }}"
+                    class="{% if forloop.first %}active{% endif %}"></li>
+                {% endfor %}
+            </ol>
+
+            <!-- Элементы управления каруселью -->
+            <a class="carousel-control-prev" href="#commentsCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#commentsCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
     </div>
+</div>
+
+
 
 </section>
 

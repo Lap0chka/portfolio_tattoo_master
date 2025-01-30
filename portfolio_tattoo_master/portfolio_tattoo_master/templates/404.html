@@ -1,0 +1,17 @@
+{%extends 'base.html'%}
+{% load i18n %}
+{% block title %}404 - Page Not Found{%endblock%}
+{%block context%}
+ <div class="row contact-top">
+    <div class="container error-page">
+        <div class="content">
+            <h1 class="text-muted">{% trans "Page Not Found" %}</h1>
+            <p class="lead">{% trans "Sorry, the page you are looking for does not exist. It may have been moved or deleted" %}.</p>
+            <a href="{% url 'portfolio' %}" class="btn btn-primary">{% trans "Go to Homepage" %}</a>
+        </div>
+    </div>
+</div
+{%endblock%}
+{%block footer%}
+{%endblock%}
+
