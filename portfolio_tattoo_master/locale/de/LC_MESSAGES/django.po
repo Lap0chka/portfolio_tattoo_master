@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-30 23:34+0100\n"
+"POT-Creation-Date: 2025-02-01 21:02+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,6 +41,22 @@ msgstr "Nachricht"
 #: portfolio/templates/portfolio/pages/index.html:60
 msgid "Submit"
 msgstr "Absenden"
+
+#: portfolio/views.py:34
+msgid "You are sending requests too often. Please wait 10 minutes."
+msgstr "Sie senden zu oft Anfragen. Bitte warten Sie 10 Minuten."
+
+#: portfolio/views.py:41
+msgid ""
+"Thank you\n"
+"I'll answer you very soon!"
+msgstr ""
+"Danke!\n"
+"Ich werde Ihnen sehr bald antworten!"
+
+#: portfolio/views.py:43
+msgid "An error occurred while processing your request."
+msgstr "Bei der Bearbeitung Ihrer Anfrage ist ein Fehler aufgetreten."
 
 #: portfolio_tattoo_master/settings.py:122
 msgid "English"

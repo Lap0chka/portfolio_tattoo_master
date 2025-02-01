@@ -11,10 +11,10 @@
         </div>
     </div>
     <div class="instagram-feeds-area owl-carousel">
-        {%for image, shortcode in img_codes.items%}
+        {% for _ in ""|rjust:21 %}
             <div class="single-instagram-feeds">
-                <img src="{% static 'img/rymma_tattoo(inst)/' %}{{ image }}" alt="">
-                <a href="https://www.instagram.com/p/{{shortcode}}"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                <img src="{% static 'img/inst_carousel/' %}{{ forloop.counter }}.JPG" alt="">
+                <a href="https://www.instagram.com/rymma_tattoo/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
             </div>
        {%endfor%}
     </div>

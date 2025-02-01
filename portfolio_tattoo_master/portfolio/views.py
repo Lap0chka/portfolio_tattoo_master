@@ -1,5 +1,9 @@
+import os
+from pathlib import Path
 from typing import Dict, Any
 
+from django.conf import settings
+from django.utils.translation import gettext as _
 from captcha.helpers import captcha_image_url
 from captcha.models import CaptchaStore
 from django.contrib import messages
@@ -30,16 +34,18 @@ def index(request: HttpRequest) -> HttpResponse:
 
     if request.method == 'POST':
         if is_limited:
-            messages.error(request, "You are sending requests too often. Please wait 10 minutes.")
+            messages.error(
+                request, _("You are sending requests too often. Please wait 10 minutes.")
+            )
         elif form.is_valid():
             try:
                 data: Dict[str, Any] = form.cleaned_data
                 send_email.delay(data)
                 form.save()
-                messages.success(request, "I'll answer you very soon!")
-            except Exception as e:
-                messages.error(request, "An error occurred while processing your request.")
-                print(f"Error in form submission: {e}")  # Replace with logging in production
+                messages.success(request, _("Thank you\nI'll answer you very soon!"))
+            except Exception:
+                messages.error(request, _("An error occurred while processing your request."))
+
         else:
             for field, errors in form.errors.items():
                 for error in errors:
@@ -78,7 +84,6 @@ def about_me(request):
     comments = [(image.text, image.author) for image in images]
     context = {
         'comments': comments,
-        'images': images,
     }
     return render(request, 'portfolio/pages/about-me.html', context)
 
