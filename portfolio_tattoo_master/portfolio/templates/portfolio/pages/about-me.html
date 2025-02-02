@@ -1,4 +1,5 @@
 {%extends 'base.html'%}
+{% load i18n %}
 {%load static%}
 
 
@@ -14,9 +15,9 @@
                 </div>
             </div>
             <div class="col-10">
-                <div class="about-content mt-100 mb-100 text-center">
+                <div class="about-content mt-100 mb-50 text-center">
                     <span></span>
-                    <h2>What can I tell you about me?</h2>
+                    <h2> {% trans "What can I tell you about me?" %}</h2>
                     <p>Please allow me to introduce myself. My name is Rima, and I am a tattoo artist with over five
                         years of experience in the industry. Throughout my journey, I have had the privilege of creating
                         numerous tattoos that have left a lasting impression on my clients. It's not just a profession
@@ -37,10 +38,40 @@
                         enthusiast. I look forward to sharing my artistic journey with you and creating meaningful
                         tattoos that reflect your individuality and spirit. Thank you for allowing me the opportunity to
                         introduce myself.</p>
-                </div>
-            </div>
 
-            <div class="col-10">
+                </div>
+
+                <div class="col-12">
+                    <h3 class="text-center mb-50"> My favourite style </h3>
+                    <div class="row">
+
+                        <div class="col-12 col-md-4">
+                            <div class="single-service-area section_padding_0_100 text-center wow fadeInUp"
+                                 data-wow-delay="0.1s">
+                                <h5>Grafika</h5>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel lectus eu felis
+                                    semper finibus ac eget ipsum. Lorem ipsum.</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="single-service-area section_padding_0_100 text-center wow fadeInUp"
+                                 data-wow-delay="0.4s">
+                                <h5>Poleneiya</h5>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel lectus eu felis
+                                    semper finibus ac eget ipsum. Lorem ipsum.</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="single-service-area section_padding_0_100 text-center wow fadeInUp"
+                                 data-wow-delay="0.9s">
+                                <h5>Botanics</h5>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel lectus eu felis
+                                    semper finibus ac eget ipsum. Lorem ipsum.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="studio-cool-facts-area mb-100">
                     <div class="row">
                         <!-- Single Cool Fact-->
@@ -50,8 +81,8 @@
                                     <img src="{%static 'img/core-img/gallery.png' %}" alt="">
                                 </div>
                                 <div class="counter-area">
-                                    <h2><span class="counter">10</span>k</h2>
-                                    <h6>Make eskize</h6>
+                                    <h2><span class="counter">7</span> Year</h2>
+                                    <h6>{% trans "Experience" %}</h6>
                                 </div>
                             </div>
                         </div>
@@ -117,14 +148,6 @@
                 {% endfor %}
             </div>
 
-            <!-- Индикаторы карусели -->
-            <ol class="carousel-indicators">
-                {% for text, author in comments %}
-                <li data-target="#commentsCarousel" data-slide-to="{{ forloop.counter0 }}"
-                    class="{% if forloop.first %}active{% endif %}"></li>
-                {% endfor %}
-            </ol>
-
             <!-- Элементы управления каруселью -->
             <a class="carousel-control-prev" href="#commentsCarousel" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -144,5 +167,7 @@
 
 <!-- About Me Area End -->
 {%include 'portfolio/include/instagram_carousel.html' %}
-
+    <script>
+        document.body.style.overflow = 'auto';
+    </script>
 {%endblock%}

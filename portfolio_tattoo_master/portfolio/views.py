@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from typing import Dict, Any
+from typing import Dict, Any, List, Tuple
 
 from django.conf import settings
 from django.utils.translation import gettext as _
@@ -79,13 +79,25 @@ def refresh_captcha(request: HttpRequest) -> JsonResponse:
         return JsonResponse({'error': 'Failed to generate captcha'}, status=500)
 
 
-def about_me(request):
+def about_me(request: HttpRequest) -> HttpResponse:
+    """
+    Renders the 'About Me' page with images and their associated comments.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The rendered 'about-me' template with context data.
+    """
     images = get_images()
-    comments = [(image.text, image.author) for image in images]
+    comments: List[Tuple[str, str]] = [(image.text, image.author) for image in images if
+                                       image.text and image.author]
     context = {
         'comments': comments,
     }
     return render(request, 'portfolio/pages/about-me.html', context)
+
+
 
 
 def portfolio(request):
