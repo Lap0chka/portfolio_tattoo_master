@@ -2,7 +2,7 @@
 {% load i18n %}
 {%load static%}
 
-
+{% block title %}{% trans "About me" %}{% endblock %}
 {%block content%}
 
 <!-- About Me Area Start -->
@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="col-10">
-                <div class="about-content mt-100 mb-50 text-center">
+                <div class="about-content mt-100 mb-50 text-center wow fadeInUp" data-wow-delay="0.1s">
                     <span></span>
                     <h2> {% trans "What can I tell you about me?" %}</h2>
                     <p>Please allow me to introduce myself. My name is Rima, and I am a tattoo artist with over five
@@ -42,31 +42,31 @@
                 </div>
 
                 <div class="col-12">
-                    <h3 class="text-center mb-50"> My favourite style </h3>
+                    <h3 class="text-center mb-50 wow fadeInUp" data-wow-delay="0.1s"> {% trans "My favourite style" %} </h3>
                     <div class="row">
-
                         <div class="col-12 col-md-4">
                             <div class="single-service-area section_padding_0_100 text-center wow fadeInUp"
                                  data-wow-delay="0.1s">
-                                <h5>Grafika</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel lectus eu felis
-                                    semper finibus ac eget ipsum. Lorem ipsum.</p>
+                                <h5>{% trans "Fine line" %}</h5>
+                                <p>delicate style using thin, precise lines with minimal shading, creating elegant and intricate designs.
+                                    They are often used for detailed artwork like florals, portraits, and script, offering a subtle and sophisticated look</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="single-service-area section_padding_0_100 text-center wow fadeInUp"
                                  data-wow-delay="0.4s">
-                                <h5>Poleneiya</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel lectus eu felis
-                                    semper finibus ac eget ipsum. Lorem ipsum.</p>
+                                <h5>Botanical style</h5>
+                                <p>feature detailed, nature-inspired designs of plants, flowers, and leaves with fine lines and realistic shading.
+                                    This style emphasizes elegance and organic beauty, often resembling botanical illustrations.
+                                </p>
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="single-service-area section_padding_0_100 text-center wow fadeInUp"
                                  data-wow-delay="0.9s">
-                                <h5>Botanics</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel lectus eu felis
-                                    semper finibus ac eget ipsum. Lorem ipsum.</p>
+                                <h5>Graphics</h5>
+                                <p>blend bold lines, abstract shapes, and high-contrast elements, often inspired by printmaking and illustration.
+                                    This style combines realism, geometry, and surrealism for a striking, artistic look.</p>
                             </div>
                         </div>
                     </div>

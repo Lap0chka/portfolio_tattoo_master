@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 
 
-class MainImages(models.Model):
+class MainImage(models.Model):
     """
     Model representing images for the main page.
     """
@@ -42,7 +42,7 @@ class MainImages(models.Model):
         """
         max_images = 15
         if validate_limit:
-            current_count = MainImages.objects.count()
+            current_count = MainImage.objects.count()
             if current_count >= max_images:
                 raise ValidationError(
                     f'A maximum of {max_images} images are allowed on the main page.'
@@ -71,7 +71,7 @@ class MainImages(models.Model):
         Returns:
             str: The position of the object in the queryset, or "Object not found" if not found.
         """
-        ordered_ids = list(MainImages.objects.order_by('pk').values_list('pk', flat=True))
+        ordered_ids = list(MainImage.objects.order_by('pk').values_list('pk', flat=True))
         try:
             index = ordered_ids.index(self.pk) + 1
             return str(index)
@@ -100,3 +100,36 @@ class Feedback(models.Model):
         Returns a string representation of the feedback entry.
         """
         return f"Feedback from {self.name} ({self.email})"
+
+
+class Tag(models.Model):
+    """
+    Represents a tag that can be associated with portfolio images.
+    """
+
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self) -> str:
+        """
+        Returns a string representation of the tag.
+        """
+        return self.name
+
+
+class PortfolioImage(models.Model):
+    """
+    Represents an image in the portfolio with associated tags.
+    """
+
+    image = models.ImageField(upload_to='portfolio/')
+    tags = models.ManyToManyField(Tag, related_name="portfolio_photos")
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        """
+        Returns a string representation of the portfolio image,
+        including its ID and associated tags.
+        """
+        tags_qs = self.tags.all()
+        tags_list = ", ".join(tag.name for tag in tags_qs) if tags_qs.exists() else "No tags"
+        return f"Image {self.id} ({tags_list})"

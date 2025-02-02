@@ -8,7 +8,7 @@ from django.db.models import Model
 from django.test import TestCase, override_settings
 from django.urls import reverse
 
-from portfolio.models import MainImages, Feedback
+from portfolio.models import MainImage, Feedback
 from .utils import get_images
 
 
@@ -21,9 +21,9 @@ class BaseViewTest(TestCase):
         """
         Set up the test environment by creating test images and test data.
         """
-        self.image = MainImages.objects.create(image='image.jpg', text="Nice photo", author="John Doe")
-        self.image2 = MainImages.objects.create(image='image.jpg', text="Great shot!", author="Jane Doe")
-        self.image3 = MainImages.objects.create(image='image.jpg', text="", author="")
+        self.image = MainImage.objects.create(image='image.jpg', text="Nice photo", author="John Doe")
+        self.image2 = MainImage.objects.create(image='image.jpg', text="Great shot!", author="Jane Doe")
+        self.image3 = MainImage.objects.create(image='image.jpg', text="", author="")
         self.url = reverse('index')
         self.data: Dict[str, str] = {
             'name': 'John Doe',
@@ -76,13 +76,13 @@ class IndexViewTests(BaseViewTest):
         """
         Test that images are retrieved from the cache and not queried again.
         """
-        cache.set('all_images', MainImages.objects.all(), timeout=60 * 30)
+        cache.set('main_images', MainImage.objects.all(), timeout=60 * 30)
 
         with patch('portfolio.models.MainImages.objects.all') as mock_queryset:
             images = get_images()
             mock_queryset.assert_not_called()
 
-        self.assertEqual(list(images), list(MainImages.objects.all()))
+        self.assertEqual(list(images), list(MainImage.objects.all()))
 
     def test_index_renders_correct_template(self) -> None:
         """
@@ -202,3 +202,5 @@ class AboutMeViewTests(BaseViewTest):
         response = self.client.get(reverse('about'))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context.get('comments', None), [])
+
+

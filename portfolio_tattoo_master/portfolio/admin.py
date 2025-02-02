@@ -1,13 +1,13 @@
 import os
-from typing import Any
+from typing import Any, Optional
 
 from django.contrib import admin
 from django.http import HttpRequest
 
-from .models import MainImages, Feedback
+from .models import MainImage, Feedback, PortfolioImage, Tag
 
 
-@admin.register(MainImages)
+@admin.register(MainImage)
 class MainImagesAdmin(admin.ModelAdmin):
     """
     Admin panel configuration for MainImages model.
@@ -108,4 +108,43 @@ class MainImagesAdmin(admin.ModelAdmin):
 
 @admin.register(Feedback)
 class FeedBackAdmin(admin.ModelAdmin):
+    """
+    Admin configuration for Feedback model.
+    """
     list_display = ('name', 'email')
+    search_fields = ('name', 'email')
+
+
+@admin.register(Tag)
+class TagsAdmin(admin.ModelAdmin):
+    """
+    Admin configuration for Tag model.
+    """
+    list_display = ('id', 'name')
+    search_fields = ('name',)
+
+
+@admin.register(PortfolioImage)
+class PortfolioPhotoAdmin(admin.ModelAdmin):
+    """
+    Admin configuration for PortfolioImage model.
+    """
+    list_display = ('id', 'uploaded_at', 'tag_list')
+    list_filter = ('tags', 'uploaded_at')
+    search_fields = ('tags__name',)
+    filter_horizontal = ('tags',)
+
+    def tag_list(self, obj: PortfolioImage) -> Optional[str]:
+        """
+        Returns a comma-separated list of tags associated with the PortfolioImage.
+
+        Args:
+            obj (PortfolioImage): The PortfolioImage instance.
+
+        Returns:
+            Optional[str]: A string representation of associated tags, or None if no tags exist.
+        """
+        tags = obj.tags.all()
+        return ", ".join(tag.name for tag in tags) if tags.exists() else None
+
+    tag_list.short_description = "Tags"

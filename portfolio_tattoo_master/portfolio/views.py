@@ -1,19 +1,18 @@
-import os
-from pathlib import Path
 from typing import Dict, Any, List, Tuple
 
-from django.conf import settings
-from django.utils.translation import gettext as _
 from captcha.helpers import captcha_image_url
 from captcha.models import CaptchaStore
 from django.contrib import messages
 from django.http import JsonResponse, HttpRequest, HttpResponse
 from django.shortcuts import render
+from django.utils.translation import gettext as _
 from django_ratelimit.decorators import ratelimit
+from pip._vendor.rich.markup import Tag
 
 from .form import FeedbackForm
+from .models import Tag
 from .task import send_email
-from .utils import get_images
+from .utils import get_images, get_portfolio_images
 
 
 @ratelimit(key='ip', rate='3/10m', method='POST', block=False)
@@ -98,10 +97,25 @@ def about_me(request: HttpRequest) -> HttpResponse:
     return render(request, 'portfolio/pages/about-me.html', context)
 
 
+def portfolio(request: HttpRequest) -> HttpResponse:
+    """
+    Renders the portfolio page with images and tags.
 
+    Args:
+        request (HttpRequest): The HTTP request object.
 
-def portfolio(request):
-    return render(request, 'portfolio/pages/portfolio.html',)
+    Returns:
+        HttpResponse: The rendered portfolio page with context data.
+    """
+    portfolio_photos = get_portfolio_images()  # Исправлено имя переменной для консистентности
+    tags = Tag.objects.all()
+
+    context: Dict[str, Any] = {
+        'portfolio_photos': portfolio_photos,
+        'tags': tags,
+    }
+
+    return render(request, 'portfolio/pages/portfolio.html', context)
 
 
 def information(request):
