@@ -28,11 +28,15 @@
                                 {% get_language_info for "de" as DE_LANGUAGE %}
                                 {% get_language_info for "en" as EN_LANGUAGE %}
 
-                                 <a {% if LANGUAGE_CODE == 'en'%} href="/{{ DE_LANGUAGE.code }}/"
-                                         {% else %} href="/{{ EN_LANGUAGE.code }}/"{% endif %}
-                                    id="switch-lang"title="{% trans 'Change language' %}">
-                                     <i class="fa fa-language fa-2x" aria-hidden="true"></i>
-                                 </a>
+                                <a {% if LANGUAGE_CODE == 'en' %}
+                                   href="/{{ DE_LANGUAGE.code }}{{ request.path|slice:'3:' }}"
+                                {% else %}
+                                    href="/{{ EN_LANGUAGE.code }}{{ request.path|slice:'3:' }}"
+                                {% endif %}
+                                    id="switch-lang" title="{% trans 'Change language' %}">
+                                    <i class="fa fa-language fa-2x" aria-hidden="true"></i>
+                                </a>
+
                             </div>
 
 
@@ -46,13 +50,13 @@
                                     <a class="nav-link" href="{% url 'about' %}">{% trans "About me" %}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'porfolio' %}">{% trans "Portfolio" %}</a>
+                                    <a class="nav-link" href="{% url 'portfolio' %}">{% trans "Portfolio" %}</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'information' %}">{% trans "Information" %}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'blog' %}">{% trans "Blog" %}</a>
+                                    <a class="nav-link" href="">{% trans "Blog" %}</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'contact' %}">{% trans "Contact" %}</a>

@@ -12,35 +12,33 @@
                         <h2>Please get in touch</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel lectus eu felis semper finibus ac eget ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vulputate id justo quis facilisis. Vestibulum id orci ligula. Sed tempor, nunc ut sodales pulvinar, mauris ante euismod magna, at elementum lectus leo sed enim. Praesent dictum suscipit tincidunt. Nulla facilisi. Aenean in mollis orci. Ut interdum vulputate ante a egestas. Pellentesque varius purus malesuada arcu semper vehicula. </p>
                     </div>
+
                 </div>
+                {% include 'includes/messages.html' %}
                 <!-- Contact Form Area -->
                 <div class="col-10">
                     <div class="contact-form-area">
                         <form action="#" method="post">
-                            {% if messages %}
-                                <ul class="messages">
-                                    {% for message in messages %}
-                                        {% if message.tags == 'error' %}
-                                            <li style="color: red;">{{ message }}</li>
-                                        {% else %}
-                                            <li style="color: green;">{{ message }}</li>
-                                        {% endif %}
-                                    {% endfor %}
-                                </ul>
-                            {% endif %}
                              {%csrf_token%}
                             <div class="row">
-                                <div class="col-12 col-md-4">
+                                <div class="col-14 col-md-6">
                                     {{form.name}}
                                 </div>
-                                <div class="col-12 col-md-4">
+                                <div class="col-14 col-md-6">
                                     {{form.email}}
                                 </div>
-                                <div class="col-12 col-md-4">
-                                    {{form.subject}}
+                                <div class="col-14 col-md-6">
+                                    {{ form.telegram }}
+                                </div>
+                                <div class="col-14 col-md-6">
+                                    {{ form.whatsapp }}
                                 </div>
                                 <div class="col-12">
                                     {{form.message}}
+                                </div>
+                                <div class="col-3 d-flex align-items-center">
+                                    {{ form.captcha }}
+                                <button class='js-captcha-refresh'>🔄</button>
                                 </div>
                                 <div class="col-12 text-center">
                                     <button type="submit" class="btn studio-btn mt-3"><img src="{% static 'img/core-img/logo-icon.png'%}" alt=""> Send</button>
@@ -66,7 +64,8 @@
                             <!-- Single Footer Content -->
                             <div class="single-footer-content">
                                 <img src="{%static 'img/core-img/map.png'%}" alt="">
-                                <a href="#">Manteuffelstrasse 77, Berlin, Germany</a>
+                                <a href="https://maps.app.goo.gl/6ZYHsEspw9aEZb638">Manteuffelstrasse 77, Berlin,
+                                    Germany</a>
                             </div>
                             <!-- Single Footer Content -->
                             <div class="single-footer-content">
@@ -88,5 +87,18 @@
         {%include 'portfolio/include/instagram_carousel.html' %}
     </section>
     <!-- Follow Me Instagram Area End -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector(".js-captcha-refresh").addEventListener("click", function (e) {
+                e.preventDefault();
 
+                fetch("{% url 'refresh_captcha' %}")
+                    .then(response => response.json())
+                    .then(data => {
+                        document.querySelector(".captcha").src = data.image_url;
+                        document.querySelector("input[name='captcha_0']").value = data.key;
+                    });
+            });
+        });
+    </script>
 {%endblock%}

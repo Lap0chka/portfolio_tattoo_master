@@ -55,7 +55,7 @@
                         </div>
                         <div class="col-12 d-flex align-items-center">
                             {{ form.captcha }}
-                            <button class='js-captcha-refresh'>🔄</button>
+                            <button class='js-captcha-refresh' >🔄</button>
                         </div>
                         <button type="submit" class="neon-submit mt-15">
                             {% trans "Submit" %}
@@ -97,21 +97,20 @@
         </ol>
     </div>
 </section>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            document.querySelector(".js-captcha-refresh").addEventListener("click", function (e) {
-                e.preventDefault();
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    document.querySelector(".js-captcha-refresh").addEventListener("click", function (e) {
+        e.preventDefault();
 
-                fetch("{% url 'refresh_captcha' %}")
-                    .then(response => response.json())
-                    .then(data => {
-                        document.querySelector(".captcha").src = data.image_url;
-                        document.querySelector("input[name='captcha_0']").value = data.key;
-                    });
+        fetch("{% url 'refresh_captcha' %}")
+            .then(response => response.json())
+            .then(data => {
+                document.querySelector(".captcha").src = data.image_url;
+                document.querySelector("input[name='captcha_0']").value = data.key;
             });
-        });
-    </script>
-
+    });
+});
+</script>
 {%endblock %}
 
 {%block footer%}

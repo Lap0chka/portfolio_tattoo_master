@@ -1,4 +1,4 @@
-{%extends 'rymma/base.html'%}
+{%extends 'base.html'%}
 {%block title%}Information{%endblock%}
 {%block content%}
         <!-- ***** Elements Area Start ***** -->
@@ -22,7 +22,7 @@
                                 <div class="tipWrap">
                                     <span class="tip"></span>
                                 </div>
-                                <span class="fill" data-percentage="95"></span>
+                                <span class="fill" data-percentage="100"></span>
                             </div>
                             <p>Ukraine</p>
                         </div>
@@ -32,7 +32,7 @@
                                 <div class="tipWrap">
                                     <span class="tip"></span>
                                 </div>
-                                <span class="fill" data-percentage="90"></span>
+                                <span class="fill" data-percentage="100"></span>
                             </div>
                             <p>Russian</p>
                         </div>
@@ -51,7 +51,7 @@
                                 <div class="tipWrap">
                                     <span class="tip"></span>
                                 </div>
-                                <span class="fill" data-percentage="25"></span>
+                                <span class="fill" data-percentage="45"></span>
                             </div>
                             <p>German</p>
                         </div>
@@ -62,7 +62,7 @@
                     <div class="accordions mb-100" id="accordion" role="tablist" aria-multiselectable="true">
                         <!-- single accordian area start -->
                         <div class="panel single-accordion">
-                            <h6><a role="button" class="" aria-expanded="true" aria-controls="collapseOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">I don't speak Germany
+                            <h6><a role="button" class="" aria-expanded="true" aria-controls="collapseOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Tattoo aftercare
                                     <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
                                     <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
                                     </a></h6>
@@ -98,7 +98,9 @@
                 </div>
             </div>
         </div>
+
     </section>
+     {%include 'portfolio/include/instagram_carousel.html' %}
     <!-- ***** Elements Area End ***** -->
 {%endblock%}
 

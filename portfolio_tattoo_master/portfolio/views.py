@@ -2,20 +2,17 @@ from typing import Dict, Any, List, Tuple
 
 from captcha.helpers import captcha_image_url
 from captcha.models import CaptchaStore
-from django.contrib import messages
 from django.http import JsonResponse, HttpRequest, HttpResponse
 from django.shortcuts import render
-from django.utils.translation import gettext as _
 from django_ratelimit.decorators import ratelimit
 from pip._vendor.rich.markup import Tag
 
 from .form import FeedbackForm
 from .models import Tag
-from .task import send_email
-from .utils import get_images, get_portfolio_images
+from .utils import get_images, get_portfolio_images, handle_contact_form
 
 
-@ratelimit(key='ip', rate='3/10m', method='POST', block=False)
+@ratelimit(key='ip', rate='2/10m', method='POST', block=False)
 def index(request: HttpRequest) -> HttpResponse:
     """
     Handles the main index page, including form submission and rate limiting.
@@ -31,24 +28,7 @@ def index(request: HttpRequest) -> HttpResponse:
 
     form = FeedbackForm(request.POST or None)
 
-    if request.method == 'POST':
-        if is_limited:
-            messages.error(
-                request, _("You are sending requests too often. Please wait 10 minutes.")
-            )
-        elif form.is_valid():
-            try:
-                data: Dict[str, Any] = form.cleaned_data
-                send_email.delay(data)
-                form.save()
-                messages.success(request, _("Thank you\nI'll answer you very soon!"))
-            except Exception:
-                messages.error(request, _("An error occurred while processing your request."))
-
-        else:
-            for field, errors in form.errors.items():
-                for error in errors:
-                    messages.error(request, f"{field}: {error}")
+    handle_contact_form(request, form, is_limited)
 
     context: Dict[str, Any] = {
         'images': images,
@@ -118,18 +98,38 @@ def portfolio(request: HttpRequest) -> HttpResponse:
     return render(request, 'portfolio/pages/portfolio.html', context)
 
 
-def information(request):
-    return render(request, 'portfolio/pages/information.html', )
+def information(request: HttpRequest) -> HttpResponse:
+    """
+    Renders the information page.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The rendered information page.
+    """
+    return render(request, 'portfolio/pages/information.html')
 
 
-def contact(request):
-    return render(request, 'portfolio/pages/contact.html', )
+@ratelimit(key='ip', rate='2/10m', method='POST', block=False)
+def contact(request: HttpRequest) -> HttpResponse:
+    """
+    Handles the contact page, including form submission and rate limiting.
 
+    Args:
+        request (HttpRequest): The HTTP request object.
 
-def blog(request):
-    return render(request, 'portfolio/pages/blog.html', )
+    Returns:
+        HttpResponse: The rendered contact page.
+    """
+    is_limited: bool = getattr(request, 'limited', False)
+    form = FeedbackForm(request.POST or None)
 
+    handle_contact_form(request, form, is_limited)
 
-def post_deteil(request, post):
-    return render(request, 'portfolio/pages/blog-about.html', )
+    context: Dict[str, Any] = {
+        'form': form,
+        'is_limited': is_limited,
+    }
 
+    return render(request, 'portfolio/pages/contact.html', context)

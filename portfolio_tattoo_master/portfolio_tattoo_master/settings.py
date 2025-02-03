@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rosetta',
     # Apps
     'portfolio',
+    'blog',
 ]
 
 MIDDLEWARE = [

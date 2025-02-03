@@ -18,6 +18,12 @@ class FeedbackForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your name'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your email'}),
             'message': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Your message'}),
-            'telegram': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Telegram username'}),
-            'whatsapp': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your WhatsApp number'}),
+            'telegram': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Your Telegram username (optional)'
+            }),
+            'whatsapp': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Your WhatsApp number (optional)'
+            }),
         }

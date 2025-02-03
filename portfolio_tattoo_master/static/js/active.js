@@ -194,15 +194,6 @@
 
 })(jQuery);
 
-$(document).ready(function(){
-    $('.owl-carousel').owlCarousel({
-        items: 1,          // Количество элементов, видимых одновременно
-        loop: true,        // Бесконечный цикл
-        autoplay: true,    // Автоматическая прокрутка
-        nav: true,         // Кнопки навигации
-        dots: true         // Точки навигации
-    });
-});
 
 function openModal() {
     document.getElementById("modalOverlay").style.display = "flex";
@@ -211,3 +202,4 @@ function openModal() {
 function closeModal() {
     document.getElementById("modalOverlay").style.display = "none";
 }
+

@@ -35,8 +35,8 @@ class BaseViewTest(TestCase):
     def correct_content_render_to_template(self,
                                            url_name: str,
                                            template_name: str,
-                                           member: str,
-                                           expect: Union[Model, List[Any]],
+                                           member: str = None,
+                                           expect: Union[Model, List[Any]] = None,
                                            ) -> None:
         """
         Ensures that the correct template is used and the expected content is present in the context.
@@ -51,9 +51,10 @@ class BaseViewTest(TestCase):
         response = self.client.get(reverse(url_name))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, template_name)
-        self.assertIn(member, response.context)
-        context = response.context[member]
-        self.assertQuerySetEqual(context, expect)
+        if member:
+            self.assertIn(member, response.context)
+            context = response.context[member]
+            self.assertQuerySetEqual(context, expect)
 
     @staticmethod
     def generate_captcha() -> Dict[str, str]:
@@ -68,17 +69,105 @@ class BaseViewTest(TestCase):
         return {'captcha_0': captcha_key, 'captcha_1': captcha_value}
 
 
-class IndexViewTests(BaseViewTest):
+class FormTestView(BaseViewTest):
+    """
+        Form test case for testing views in the application.
+    """
+
+    def setUp(self):
+        super().setUp()
+        self.data: Dict[str, str] = {
+            'name': 'John Doe',
+            'email': 'john@example.com',
+            'message': 'Hello!',
+        }
+
+    def post_request_valid_form(self, url: str):
+        """
+          Test view renders the correct template and context.
+        """
+        valid_data = self.data | self.generate_captcha()
+        initial_count = Feedback.objects.count()
+        response = self.client.post(url, data=valid_data)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(Feedback.objects.count(), initial_count + 1)
+
+        messages_list = [msg.message for msg in messages.get_messages(response.wsgi_request)]
+        self.assertIn("Thank you\nI'll answer you very soon!", messages_list)
+
+    def post_request_invalid_form(self, url) -> None:
+        """
+        Test that an invalid form submission does not create a Feedback entry and returns errors.
+        """
+        invalid_data = {'name': '', 'email': 'invalid-email', 'message': ''}
+        initial_count = Feedback.objects.count()
+
+        response = self.client.post(url, data=invalid_data)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(Feedback.objects.count(), initial_count)
+        messages_list = [msg.message for msg in messages.get_messages(response.wsgi_request)]
+        self.assertIn("name: This field is required.", messages_list)
+        self.assertIn("email: Enter a valid email address.", messages_list)
+
+    def post_request_rate_limited(self, url) -> None:
+        """
+        Test that excessive form submissions trigger rate limiting.
+        """
+        initial_count = Feedback.objects.count()
+
+        # Send 3 valid requests within the allowed limit
+        for _ in range(3):
+            valid_data = self.data | self.generate_captcha()
+            self.client.post(url, data=valid_data)
+
+        # Send one more request that should be rate-limited
+        valid_data = self.data | self.generate_captcha()
+        response = self.client.post(url, data=valid_data)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(Feedback.objects.count(), initial_count + 2)
+
+        messages_list = [msg.message for msg in messages.get_messages(response.wsgi_request)]
+        self.assertIn("You are sending requests too often. Please wait 10 minutes.", messages_list)
+
+    def exception_handling_in_post(self, url) -> None:
+        """
+        Tests that an exception raised during email sending is properly handled.
+        """
+        valid_data = self.data | self.generate_captcha()
+        initial_count = Feedback.objects.count()
+
+        # Simulate an exception when calling send_email.delay()
+        with patch("portfolio.utils.send_email.delay", side_effect=Exception("Test Exception")):
+            response = self.client.post(url, data=valid_data, follow=True)
+
+        self.assertEqual(response.status_code, 200)
+
+        # Ensure that the Feedback object was not created due to the exception
+        self.assertEqual(Feedback.objects.count(), initial_count)
+
+        # Check that the expected error message was added to Django messages
+        messages_list = [msg.message for msg in messages.get_messages(response.wsgi_request)]
+        self.assertIn("An error occurred while processing your request.", messages_list)
+
+
+class IndexViewTests(FormTestView):
     """
     Test case for the index view and related functionalities.
     """
+    def setUp(self):
+        super().setUp()
+        self.url = reverse('index')
+
     def test_get_images_from_cache(self) -> None:
         """
         Test that images are retrieved from the cache and not queried again.
         """
         cache.set('main_images', MainImage.objects.all(), timeout=60 * 30)
 
-        with patch('portfolio.models.MainImages.objects.all') as mock_queryset:
+        with patch('portfolio.models.MainImage.objects.all') as mock_queryset:
             images = get_images()
             mock_queryset.assert_not_called()
 
@@ -92,83 +181,35 @@ class IndexViewTests(BaseViewTest):
             'index',
             'portfolio/pages/index.html',
             'images',
-            MainImages.objects.all(),
+            MainImage.objects.all(),
         )
-
-
 
     def test_post_request_valid_form(self) -> None:
         """
         Test that a valid form submission creates a Feedback entry and shows a success message.
         """
-        valid_data = self.data | self.generate_captcha()
-        initial_count = Feedback.objects.count()
-
-        response = self.client.post(self.url, data=valid_data)
-
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(Feedback.objects.count(), initial_count + 1)
-
-        messages_list = [msg.message for msg in messages.get_messages(response.wsgi_request)]
-        self.assertIn("Thank you\nI'll answer you very soon!", messages_list)
+        self.post_request_valid_form(self.url)
 
     def test_post_request_invalid_form(self) -> None:
         """
-        Test that an invalid form submission does not create a Feedback entry and returns errors.
+        Test that index an invalid form submission does not create a Feedback entry and returns errors.
         """
-        invalid_data = {'name': '', 'email': 'invalid-email', 'message': ''}
-        initial_count = Feedback.objects.count()
+        self.post_request_invalid_form(self.url)
 
-        response = self.client.post(self.url, data=invalid_data)
-
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(Feedback.objects.count(), initial_count)
-
-        messages_list = [msg.message for msg in messages.get_messages(response.wsgi_request)]
-        self.assertIn("name: This field is required.", messages_list)
-        self.assertIn("email: Enter a valid email address.", messages_list)
 
     @override_settings(RATELIMIT_ENABLE=True)
     def test_post_request_rate_limited(self) -> None:
         """
         Test that excessive form submissions trigger rate limiting.
         """
-        initial_count = Feedback.objects.count()
+        self.post_request_rate_limited(self.url)
 
-        # Send 3 valid requests within the allowed limit
-        for _ in range(3):
-            valid_data = self.data | self.generate_captcha()
-            self.client.post(self.url, data=valid_data)
-
-        # Send one more request that should be rate-limited
-        valid_data = self.data | self.generate_captcha()
-        response = self.client.post(self.url, data=valid_data)
-
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(Feedback.objects.count(), initial_count + 3)
-
-        messages_list = [msg.message for msg in messages.get_messages(response.wsgi_request)]
-        self.assertIn("You are sending requests too often. Please wait 10 minutes.", messages_list)
 
     def test_exception_handling_in_post(self) -> None:
         """
         Tests that an exception raised during email sending is properly handled.
         """
-        valid_data = self.data | self.generate_captcha()
-        initial_count = Feedback.objects.count()
-
-        # Simulate an exception when calling send_email.delay()
-        with patch("portfolio.views.send_email.delay", side_effect=Exception("Test Exception")):
-            response = self.client.post(self.url, data=valid_data, follow=True)
-
-        self.assertEqual(response.status_code, 200)
-
-        # Ensure that the Feedback object was not created due to the exception
-        self.assertEqual(Feedback.objects.count(), initial_count)
-
-        # Check that the expected error message was added to Django messages
-        messages_list = [msg.message for msg in messages.get_messages(response.wsgi_request)]
-        self.assertIn("An error occurred while processing your request.", messages_list)
+        self.exception_handling_in_post(self.url)
 
 
 class AboutMeViewTests(BaseViewTest):
@@ -204,3 +245,61 @@ class AboutMeViewTests(BaseViewTest):
         self.assertEqual(response.context.get('comments', None), [])
 
 
+class InformationViewTests(BaseViewTest):
+    """
+    Test cases for the Information page view.
+    """
+
+    def test_information_template(self) -> None:
+        """
+        Tests that the information page renders the correct template.
+        """
+        self.correct_content_render_to_template(
+            url_name='information',
+            template_name='portfolio/pages/information.html',
+        )
+
+
+class ContactViewTests(FormTestView):
+    """
+    Test case for the contact view and related functionalities.
+    """
+    def setUp(self):
+        super().setUp()
+        self.url = reverse('contact')
+
+    def test_index_renders_correct_template(self) -> None:
+        """
+        Test that the index view renders the correct template and context.
+        """
+        self.correct_content_render_to_template(
+            'contact',
+            'portfolio/pages/contact.html',
+        )
+
+    def test_post_request_valid_form(self) -> None:
+        """
+        Test that a valid form submission creates a Feedback entry and shows a success message.
+        """
+        self.post_request_valid_form(self.url)
+
+    def test_post_request_invalid_form(self) -> None:
+        """
+        Test that index an invalid form submission does not create a Feedback entry and returns errors.
+        """
+        self.post_request_invalid_form(self.url)
+
+
+    @override_settings(RATELIMIT_ENABLE=True)
+    def test_post_request_rate_limited(self) -> None:
+        """
+        Test that excessive form submissions trigger rate limiting.
+        """
+        self.post_request_rate_limited(self.url)
+
+
+    def test_exception_handling_in_post(self) -> None:
+        """
+        Tests that an exception raised during email sending is properly handled.
+        """
+        self.exception_handling_in_post(self.url)
