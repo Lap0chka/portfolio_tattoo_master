@@ -1,4 +1,4 @@
-{%extends 'rymma/base.html'%}
+{%extends 'base.html'%}
 {%load static%}
 {%block title%}My Blog{%endblock%}
 {%block content%}
@@ -10,15 +10,14 @@
                      {%for post in posts%}
                       <div class="single-blog-area text-center mb-100 wow fadeInUpBig" data-wow-delay="100ms" data-wow-duration="1s">
                         <div class="blog-thumbnail mb-100">
-                            <img src="{{post.pictures.url}}" alt="">
+                            <img src="{{post.image.url}}" alt="">
                         </div>
                         <div class="blog-content">
                             <span></span>
                             <h2>{{post.title}}</h2>
                             <a href="#" style="color:grey;">{{post.view}} view{{post.view|pluralize}}</a>
-                            <a href="#" class="post-date">{{post.publish}}</a>
-                            <a href="#" class="post-author">By {{post.author}}</a>
-                            <p>{{ post.body|truncatewords:60|linebreaks }}</p>
+                            <a href="#" class="post-date">{{post.created_at}}</a>
+                            <p>{{ post.content|truncatewords:60|linebreaks }}</p>
                             <a href="{{post.get_absolute_url}}"  class="btn studio-btn"><img src="{%static 'img/core-img/logo-icon.png'%}" alt=""> Read More</a>
                         </div>
                       </div>
