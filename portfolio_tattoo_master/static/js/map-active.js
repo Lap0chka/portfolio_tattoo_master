@@ -1,7 +1,7 @@
 
         var map;
         var addressCoordinates = { "lat": 52.497694, "lng": 13.42525 }; // Координаты Manteuffelstraße 77, Berlin
-        var targetGoogleMapsUrl = "https://www.google.com/maps/place/Atelier+Jiyu/@52.4973969,13.4248548,19z/data=!4m6!3m5!1s0x47a84f6d887bf145:0xf474b9e198516c82!8m2!3d52.4973961!4d13.4260725!16s%2Fg%2F11p73kq0g0?entry=ttu&g_ep=EgoyMDI1MDEyOS4xIKXMDSoJLDEwMjExMjMzSAFQAw%3D%3D"; // URL для открытия при клике
+        var targetGoogleMapsUrl = "https://www.google.com/maps/place/Atelier+Jiyu/@52.4973969,13.4248548,19z/data=!4m6!3m5!1s0x47a84f6d887bf145:0xf474b9e198516c82!8m2!3d52.4973961!4d13.4260725!16s%2Fg%2F11p73kq0g0?entry=ttu&g_ep=EgoyMDI1MDEyOS4xIKXMDSoJLDEwMjExMjMzSAFQAw%3D%3D";
 
         var stylez = [{
             featureType: "all",

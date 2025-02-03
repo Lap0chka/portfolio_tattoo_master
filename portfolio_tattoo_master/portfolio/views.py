@@ -7,6 +7,7 @@ from django.shortcuts import render
 from django_ratelimit.decorators import ratelimit
 from pip._vendor.rich.markup import Tag
 
+from django.conf import settings
 from .form import FeedbackForm
 from .models import Tag
 from .utils import get_images, get_portfolio_images, handle_contact_form
@@ -130,6 +131,7 @@ def contact(request: HttpRequest) -> HttpResponse:
     context: Dict[str, Any] = {
         'form': form,
         'is_limited': is_limited,
+        'GOOGLE_MAPS_API_KEY': settings.GOOGLE_MAPS_API_KEY
     }
 
     return render(request, 'portfolio/pages/contact.html', context)
