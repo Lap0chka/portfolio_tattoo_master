@@ -10,7 +10,7 @@ from pip._vendor.rich.markup import Tag
 from django.conf import settings
 from .form import FeedbackForm
 from .models import Tag
-from .utils import get_images, get_portfolio_images, handle_contact_form
+from .utils import get_images, get_portfolio_images, handle_form
 
 
 @ratelimit(key='ip', rate='2/10m', method='POST', block=False)
@@ -29,7 +29,7 @@ def index(request: HttpRequest) -> HttpResponse:
 
     form = FeedbackForm(request.POST or None)
 
-    handle_contact_form(request, form, is_limited)
+    handle_form(request, form, is_limited)
 
     context: Dict[str, Any] = {
         'images': images,
@@ -125,8 +125,7 @@ def contact(request: HttpRequest) -> HttpResponse:
     """
     is_limited: bool = getattr(request, 'limited', False)
     form = FeedbackForm(request.POST or None)
-
-    handle_contact_form(request, form, is_limited)
+    handle_form(request, form, is_limited)
 
     context: Dict[str, Any] = {
         'form': form,

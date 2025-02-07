@@ -1,4 +1,4 @@
-{%extends 'rymma/base.html'%}
+{% extends 'base.html' %}
 {%load static%}
 {%block title%}Deteil Block{%endblock%}
 {%block content%}
@@ -10,14 +10,14 @@
                 <div class="col-10">
                     <div class="single-blog-area text-center mb-100 wow fadeInUpBig" data-wow-delay="100ms" data-wow-duration="1s">
                         <div class="blog-thumbnail mb-100">
-                            <img src="{{post.pictures.url}}" alt="">
+                            <img src="{{ post.image.url }}" alt="">
                         </div>
                         <div class="blog-content">
                             <span></span>
                             <h2>{{post.title}}</h2>
-                            <a href="#" class="post-date">{{post.published}}</a>
+                            <a href="#" class="post-date">{{ post.created_at }}</a>
                             <a href="#" class="post-author">By {{post.author}}</a>
-                            <p>{{ post.body|linebreaks }}</p>
+                            <p>{{ post.content|linebreaks }}</p>
                         </div>
                     </div>
                 </div>
@@ -30,46 +30,45 @@
                                 <p> </p>
                             </div>
                             <div class="row">
-                                <div class="col-md-6" id="comments-container">
+                                <div class="wow fadeInUpBig col-md-6" id="comments-container">
                                     <h5 class="mb-4">
                                          {% with comments.count as total_comments %}
-                                            {{ total_comments }} review{{ total_comments|pluralize }}
+                                             {{ total_comments }} Review{{ total_comments|pluralize }}
                                         {% endwith %}
                                     </h5>
-                                    {%for comment in comments%}
-                                        <div class="media mb-4" >
+                                    {% for comment in comments %}
+                                        <div class="media mb-4">
                                             <div class="media-body">
-                                                <h6>{{comment.user}}<small> - <i>{{comment.created}}</i></small></h6>
-                                                <p>{{comment.body}}</p>
+                                                <h6>{{ comment.username }}<small> - <i>{{ comment.created }}</i></small>
+                                                </h6>
+                                                <p>{{ comment.body }}</p>
+
+                                                {% if comment.children.all %}
+                                                    <div class="ml-5">
+                                                        {% include 'blog/comment.html' with comments=comment.children.all %}
+                                                    </div>
+                                                {% endif %}
                                             </div>
                                         </div>
-                                    {%endfor%}
+                                    {% endfor %}
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 wow fadeInUpBig">
                                     <h4 class="mb-4">Leave a review</h4>
                                     <form action="" method="post" >
                                         {%csrf_token%}
                                         <div class="form-group">
-                                            <label> Your Review </label>
-                                            {% if messages %}
-                                                <ul class="messages">
-                                                    {% for message in messages %}
-                                                        {% if message.tags == 'error' %}
-                                                            <li style="color: red;">{{ message }}</li>
-                                                        {% else %}
-                                                            <li style="color: green;">{{ message }}</li>
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                </ul>
-                                            {% endif %}
-                                            {{form.user}}
+                                            <label> Your Username </label>
+                                            {{ form.username }}
                                             <br>
                                             <div class="col-14">
-                                                {{form.body}}
+
+                                                {{ form.body }}
                                             </div>
                                         </div>
                                         <div class="col-12 text-center">
-                                            <button type="submit" class="btn studio-btn mt-3"><img src="img/core-img/logo-icon.png" alt=""> Send</button>
+                                            <button type="submit" class="btn studio-btn mt-3">
+                                                <img src="{% static 'img/core-img/logo-icon.png' %}" alt=""> Send
+                                            </button>
                                         </div>
                                     </form>
                                 </div>
