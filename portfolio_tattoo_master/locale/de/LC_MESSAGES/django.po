@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-01 21:02+0100\n"
+"POT-Creation-Date: 2025-02-09 23:07+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,51 +18,197 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: portfolio/templates/portfolio/pages/index.html:13
+#: portfolio/templates/portfolio/include/instagram_carousel.html:9
+msgid "Follow me @ Instagram"
+msgstr "Folge mir auf Instagram"
+
+#: portfolio/templates/portfolio/pages/about-me.html:5
+#: portfolio_tattoo_master/templates/includes/menu.html:50
+msgid "About me"
+msgstr "Über mich"
+
+#: portfolio/templates/portfolio/pages/about-me.html:20
+msgid "What can I tell you about me?"
+msgstr "Was kann ich Ihnen über mich erzählen?"
+
+#: portfolio/templates/portfolio/pages/about-me.html:22
+msgid ""
+"\n"
+"                        My name is Rimma, and I have been a tattoo artist "
+"for over 5 years. I specialize in graphic, fine line, and botanical tattoo "
+"styles.<br>\n"
+"                        I graduated from art school and continue to practice "
+"drawing to this day. Art has always been a huge part of my life, and "
+"tattooing allows me to bring meaningful designs to people. For me, a tattoo "
+"is not just an image—it is an important story, a way to express emotions, "
+"memories, or milestones. That’s why I focus on working closely with my "
+"clients to understand their wishes and ideas, ensuring that every piece is "
+"unique and personal. I love working with details and creating delicate, "
+"elegant designs.<br>\n"
+"I easily connect with people, so during my tattoo sessions, you will feel "
+"comfortable—no awkwardness or fear. I always strive to create a relaxed and "
+"welcoming atmosphere where you can enjoy the process.\n"
+"                        I look forward to meeting you and creating something "
+"special together!\n"
+"                        "
+msgstr ""
+"\n"
+"                        Mein Name ist Rimma und ich bin seit über 5 Jahren "
+"Tätowiererin. Ich spezialisiere mich auf grafische, feine Linien und "
+"botanische Tattoo-Stile.<br>\n"
+"                        Ich habe eine Kunstschule absolviert und übe das "
+"Zeichnen bis heute weiter. Kunst war schon immer ein großer Teil meines "
+"Lebens, und das Tätowieren ermöglicht es mir, bedeutungsvolle Designs für "
+"Menschen zu schaffen. Für mich ist ein Tattoo nicht nur ein Bild – es ist "
+"eine wichtige Geschichte, eine Möglichkeit, Emotionen, Erinnerungen oder "
+"Meilensteine auszudrücken. Deshalb lege ich großen Wert darauf, eng mit "
+"meinen Kunden zusammenzuarbeiten, ihre Wünsche und Ideen zu verstehen, und "
+"sicherzustellen, dass jedes Motiv einzigartig und persönlich ist. Ich liebe "
+"es, mit Details zu arbeiten und filigrane, elegante Designs zu schaffen."
+"<br>\n"
+"Ich verbinde mich leicht mit Menschen, sodass Sie sich während meiner "
+"Tätowierungssitzungen wohlfühlen werden – keine Unbeholfenheit oder Angst. "
+"Ich bemühe mich immer, eine entspannte und einladende Atmosphäre zu "
+"schaffen, in der Sie den Prozess genießen können.\n"
+"                        Ich freue mich darauf, Sie kennenzulernen und "
+"gemeinsam etwas Besonderes zu schaffen!\n"
+"                        "
+
+#: portfolio/templates/portfolio/pages/about-me.html:32
+msgid "My favourite style"
+msgstr "Mein Lieblingsstil"
+
+#: portfolio/templates/portfolio/pages/about-me.html:37
+msgid "Fine line"
+msgstr "Feine Linie"
+
+#: portfolio/templates/portfolio/pages/about-me.html:40
+msgid ""
+"delicate style using thin, precise lines with minimal shading, creating "
+"elegant and intricate designs.\n"
+"                                    They are often used for detailed artwork "
+"like florals, portraits, and script, offering a subtle and sophisticated "
+"look\n"
+"                                    "
+msgstr ""
+"Ein zarter Stil mit dünnen, präzisen Linien und minimaler Schattierung, der "
+"elegante und filigrane Designs schafft.\n"
+"                                    Er wird oft für detaillierte Kunstwerke "
+"wie Blumenmotive, Porträts und Schriftzüge verwendet, und bietet eine "
+"subtile und raffinierte Optik.\n"
+"                                    "
+
+#: portfolio/templates/portfolio/pages/about-me.html:49
+msgid "Botanical style"
+msgstr "Botanischer Stil"
+
+#: portfolio/templates/portfolio/pages/about-me.html:51
+msgid ""
+"feature detailed, nature-inspired designs of plants, flowers, and leaves "
+"with fine lines and realistic shading.\n"
+"                                    This style emphasizes elegance and "
+"organic beauty, often resembling botanical illustrations.\n"
+"                                    "
+msgstr ""
+"Zeigt detaillierte, von der Natur inspirierte Designs von Pflanzen, Blumen "
+"und Blättern mit feinen Linien und realistischen Schattierungen.\n"
+"                                    Dieser Stil betont Eleganz und "
+"natürliche Schönheit und ähnelt oft botanischen Illustrationen.\n"
+"                                    "
+
+#: portfolio/templates/portfolio/pages/about-me.html:60
+msgid "Graphics"
+msgstr "Grafikstil"
+
+#: portfolio/templates/portfolio/pages/about-me.html:62
+msgid ""
+"blend bold lines, abstract shapes, and high-contrast elements, often "
+"inspired by printmaking and illustration.\n"
+"                                    This style combines realism, geometry, "
+"and surrealism for a striking, artistic look.\n"
+"                                     "
+msgstr ""
+"Vereint kräftige Linien, abstrakte Formen und kontrastreiche Elemente, oft "
+"inspiriert von Druckgrafik und Illustration.\n"
+"                                    Dieser Stil kombiniert Realismus, "
+"Geometrie und Surrealismus für eine markante, künstlerische Optik.\n"
+"                                     "
+
+#: portfolio/templates/portfolio/pages/about-me.html:80
+msgid "Year"
+msgstr "Jahr"
+
+#: portfolio/templates/portfolio/pages/about-me.html:81
+msgid "Experience"
+msgstr "Erfahrung"
+
+#: portfolio/templates/portfolio/pages/about-me.html:93
+msgid "Happy clients"
+msgstr "Zufriedene Kunden"
+
+#: portfolio/templates/portfolio/pages/about-me.html:105
+msgid "Made Tattoo"
+msgstr "Erstellte Tattoos"
+
+#: portfolio/templates/portfolio/pages/about-me.html:117
+msgid "Reviews"
+msgstr "Bewertungen"
+
+#: portfolio/templates/portfolio/pages/about-me.html:130
+
+msgid "Review"
+msgstr "Bewertungen"
+
+#: portfolio/templates/portfolio/pages/about-me.html:131
+msgid "Clients Say"
+msgstr "Kundenmeinungen"
+
+#: portfolio/templates/portfolio/pages/index.html:3
+msgid "Welcome"
+msgstr "Willkommen"
+
+#: portfolio/templates/portfolio/pages/index.html:14
 msgid "Make an appointment"
 msgstr "Einen Termin vereinbaren"
 
-#: portfolio/templates/portfolio/pages/index.html:18
+#: portfolio/templates/portfolio/pages/index.html:19
 msgid "Submit Your Info"
 msgstr "Ihre Informationen übermitteln"
 
-#: portfolio/templates/portfolio/pages/index.html:22
+#: portfolio/templates/portfolio/pages/index.html:23
 msgid "Name"
 msgstr "Name"
 
-#: portfolio/templates/portfolio/pages/index.html:27
+#: portfolio/templates/portfolio/pages/index.html:28
 msgid "Email"
 msgstr "E-Mail"
 
-#: portfolio/templates/portfolio/pages/index.html:32
+#: portfolio/templates/portfolio/pages/index.html:33
 msgid "Message"
 msgstr "Nachricht"
 
-#: portfolio/templates/portfolio/pages/index.html:60
+#: portfolio/templates/portfolio/pages/index.html:61
 msgid "Submit"
 msgstr "Absenden"
 
-#: portfolio/views.py:34
+#: portfolio/templates/portfolio/pages/portfolio.html:4
+#: portfolio_tattoo_master/templates/includes/menu.html:53
+msgid "Portfolio"
+msgstr "Portfolio"
+
+#: portfolio/utils.py:74
 msgid "You are sending requests too often. Please wait 10 minutes."
 msgstr "Sie senden zu oft Anfragen. Bitte warten Sie 10 Minuten."
 
-#: portfolio/views.py:41
-msgid ""
-"Thank you\n"
-"I'll answer you very soon!"
-msgstr ""
-"Danke!\n"
-"Ich werde Ihnen sehr bald antworten!"
-
-#: portfolio/views.py:43
+#: portfolio/utils.py:107
 msgid "An error occurred while processing your request."
 msgstr "Bei der Bearbeitung Ihrer Anfrage ist ein Fehler aufgetreten."
 
-#: portfolio_tattoo_master/settings.py:122
+#: portfolio_tattoo_master/settings.py:123
 msgid "English"
 msgstr "Englisch"
 
-#: portfolio_tattoo_master/settings.py:123
+#: portfolio_tattoo_master/settings.py:124
 msgid "Deutsch"
 msgstr "Deutsch"
 
@@ -92,34 +238,29 @@ msgstr ""
 "Hoppla! Auf unserer Seite ist ein Fehler aufgetreten. Wir arbeiten daran, "
 "ihn zu beheben."
 
-#: portfolio_tattoo_master/templates/includes/head.html:11
-msgid "Welcome"
-msgstr "Willkommen"
-
-#: portfolio_tattoo_master/templates/includes/menu.html:33
+#: portfolio_tattoo_master/templates/includes/menu.html:36
 msgid "Change language"
 msgstr "Sprache ändern"
 
-#: portfolio_tattoo_master/templates/includes/menu.html:42
+#: portfolio_tattoo_master/templates/includes/menu.html:46
 msgid "Home"
 msgstr "Startseite"
 
-#: portfolio_tattoo_master/templates/includes/menu.html:46
-msgid "About me"
-msgstr "Über mich"
-
-#: portfolio_tattoo_master/templates/includes/menu.html:49
-msgid "Portfolio"
-msgstr "Portfolio"
-
-#: portfolio_tattoo_master/templates/includes/menu.html:52
+#: portfolio_tattoo_master/templates/includes/menu.html:56
 msgid "Information"
 msgstr "Informationen"
 
-#: portfolio_tattoo_master/templates/includes/menu.html:55
+#: portfolio_tattoo_master/templates/includes/menu.html:59
 msgid "Blog"
 msgstr "Blog"
 
-#: portfolio_tattoo_master/templates/includes/menu.html:58
+#: portfolio_tattoo_master/templates/includes/menu.html:62
 msgid "Contact"
 msgstr "Kontakt"
+
+#~ msgid ""
+#~ "Thank you\n"
+#~ "I'll answer you very soon!"
+#~ msgstr ""
+#~ "Danke!\n"
+#~ "Ich werde Ihnen sehr bald antworten!"

@@ -56,7 +56,7 @@ def handle_form(
         request: HttpRequest,
         form: FeedbackForm,
         is_limited: bool,
-        text_message: str = "Thank you! I will answer soon.",
+        text_message: str = "Thank you\nI'll answer you very soon!",
         is_comment_form: bool = False) -> None:
     """
     Handles contact form submission.

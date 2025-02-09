@@ -5,7 +5,6 @@ from captcha.models import CaptchaStore
 from django.http import JsonResponse, HttpRequest, HttpResponse
 from django.shortcuts import render
 from django_ratelimit.decorators import ratelimit
-from pip._vendor.rich.markup import Tag
 
 from django.conf import settings
 from .form import FeedbackForm

@@ -9,6 +9,7 @@
                 <!-- Single Blog Area -->
                 <div class="col-10">
                     <div class="single-blog-area text-center mb-100 wow fadeInUpBig" data-wow-delay="100ms" data-wow-duration="1s">
+                        {% include 'includes/messages.html'%}
                         <div class="blog-thumbnail mb-100">
                             <img src="{{ post.image.url }}" alt="">
                         </div>
@@ -61,7 +62,6 @@
                                             {{ form.username }}
                                             <br>
                                             <div class="col-14">
-
                                                 {{ form.body }}
                                             </div>
                                         </div>

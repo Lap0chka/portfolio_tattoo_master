@@ -18,7 +18,14 @@ def detail_post(request, slug):
     form = CommentForm(request.POST or None)
     if form.is_valid():
         comment = form.save(commit=False)
-        handle_form(request, form, is_limited)
+        comment.post = post
+        handle_form(
+            request,
+            form,
+            is_limited,
+            text_message='Thank you for your comment!',
+            is_comment_form=True
+        )
         comment.save()
     comments = post.comments.filter(parent=None)
     context = {

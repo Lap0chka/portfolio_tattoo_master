@@ -148,3 +148,4 @@ class PortfolioPhotoAdmin(admin.ModelAdmin):
         return ", ".join(tag.name for tag in tags) if tags.exists() else None
 
     tag_list.short_description = "Tags"
+
